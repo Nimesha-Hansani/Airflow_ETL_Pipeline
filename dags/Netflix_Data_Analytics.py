@@ -7,11 +7,21 @@ from airflow.operators.dummy import DummyOperator
 import sys
 import boto3
 
+#Loan environment variables from  .env file
+load_dotenv()
+
+
 sys.path.append('/home/airflow/Airflow_ETL_Pipeline/dags')
 from source_load.data_load import run_script
 from alerting.slack_alert import task_success_slack_alert
 
 def send_sns_message(context):
+    
+    topic_arn = os.getenv("AIRFLOW_SNS_TOPIC_ARN")
+    
+    if not topic_arn:
+        raise ValueError("SNS Topic ARN is not set in the environment variables.")
+
     sns_client = boto3.client('sns',region_name='us-east-1')
 
     # Publish the message
