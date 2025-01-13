@@ -1,0 +1,11 @@
+{{ config (
+  tags = [var('TAG_TEST')]
+)
+
+}}
+
+
+
+
+
+SELECT * FROM PROD.DBT_PROD.MOVIES_SERIES_SHARE WHERE GENRES IS NULL

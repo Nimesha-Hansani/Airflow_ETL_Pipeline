@@ -1,0 +1,21 @@
+{{ config(
+    pre_hook="ALTER SESSION SET QUOTED_IDENTIFIERS_IGNORE_CASE = true" 
+) }}
+
+
+
+{{ config(
+    tags=[var('TAG_DIMENSION')]
+) }}
+
+
+
+
+SELECT
+ID
+,IMDB_ID
+,IMDB_SCORE
+,IMDB_VOTES
+,TMDB_POPULARITY
+,TMDB_SCORE
+FROM PROD.DBT_RAW.TITLES
